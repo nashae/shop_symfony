@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon espace client{% endblock %}
+
+{% block content %}
+ 
+ <h1>Mon compte</h1>
+ Bienvenue dans votre espace client {{app.user.firstName}} <br />
+ Vous pouvez gérer vos informations personnelles à partir de cette page
+ <hr>
+ <a href="{{path('account_password')}}">Modifier mon mot de passe</a> <br />
+ 
+{% endblock %}
