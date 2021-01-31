@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes adresses
+{% endblock %}
+
+{% block content %}
+
+<h1>Mes adresses</h1>
+<a href="{{path('account_address_add')}}" class="btn btn-info btn-sm float-right">Ajouter une adresse</a>
+Vous pouvez gérer vos différentes adresses à partir de cette page
+<br/>
+<a href="{{path('account') }}">Retour</a>
+<hr>
+{% if app.user.addresses | length == 0 %}
+	<p class="text-center">
+		Vous n'avez pas encore ajouté d'adresse,
+		<a href="{{path('account_address_add')}}">veuillez en créer une</a>
+	</p>
+{% else %}
+        <div class="row">
+	{% for address in app.user.addresses %}
+            <div class="col-md-6">
+                <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{address.name}}</h5>
+                    <hr/>
+                    <h6 class="card-subtitle mb-2">{{address.firstname}} {{address.lastname}}</h6>
+                    <p class="card-text">{{address.address}}</p>
+                    <p class="card-text">{{address.postal}} {{address.city}} - {{address.country}}</p>
+                    <p class="card-text">{{address.phone}}</p>
+                    {% if address.company %}
+                        <p class="card-text">Votre societé : {{address.company}}</p>
+                    {% else %}
+                        <p class="card-text"</p>adresse personnelle</p>
+                    {% endif %}
+                    <a href="{{path('account_address_delete',{'id' : address.id})}}" class="btn btn-warning">Supprimer l'adresse</a>
+                    <a href="{{path('account_address_edit', {'id' : address.id})}}" class="btn btn-info float-right">Modifier l'adresse</a>
+                </div>
+            </div>
+        </div>
+{% endfor %}
+	</div>
+{% endif %}
+{% endblock %}
